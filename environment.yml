@@ -1,0 +1,36 @@
+name: siglet_architecture
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pandas
+  - numpy
+  - scipy
+  - matplotlib
+  - seaborn
+  - scikit-learn
+  - xgboost
+  - catboost
+  - imbalanced-learn
+  - shap
+  - mlflow
+  - optuna
+  - loguru
+  - joblib
+  - jupyter
+  - notebook
+  - ipykernel
+  - ipywidgets
+  - pip
+  - typer
+  - loguru
+  - tqdm
+  - ruff
+  - pytest
+  - black
+  - pre-commit
+  - pip:
+    - python-dotenv
+    - mkdocs
+    - nbqa
+    - -e .
