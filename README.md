@@ -1,10 +1,42 @@
-# siglet_architecture
+# Siglet-Qubit Architecture
 
-<a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
-    <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
-</a>
 
-siglet_architecture
+## Project Overview
+
+This project implements a classical prototype of the Siglet-Qubit kernel, a system for quantum information processing that explores stability, resonance, and coherence in quantum-like systems. The architecture investigates how various parameter combinations affect truth scores and decay curves, identifying stable regions in parameter space for potential quantum computing applications.
+
+## Objectives
+
+- Build a classical simulation of the Siglet-Qubit system
+- Generate and analyze decay curves with varying parameters (θ, τ)
+- Identify regions of parameter space with similar behavior using clustering techniques
+- Measure curve similarities using Dynamic Time Warping (DTW)
+- Evaluate the effects of noise on cluster stability
+- Extract scientific findings about shape invariance in the system
+- Establish an optimal set of primitive operators for the system
+
+## Technical Approach
+
+The project employs several data science techniques:
+
+- **Parameter Space Exploration**: Systematic generation of decay curves across theta-tau grids
+- **Time Series Analysis**: DTW distance metrics for measuring curve similarity
+- **Clustering**: DBSCAN and Spectral Clustering to identify regions with similar dynamics
+- **Optimization**: Optuna for hyperparameter tuning and operator selection
+- **Noise Analysis**: Stability testing with various noise levels
+- **Visualization**: Heatmaps, cluster plots, and 3D visualizations to interpret results
+- **Experiment Tracking**: MLflow to record parameters, metrics, and artifacts
+
+## Key Features
+
+- `SigletQubit` class with configurable parameters (θ, τ, μ, etc.)
+- Truth score calculation with temporal decay
+- Parameter space visualization with heatmaps
+- Comprehensive clustering analysis with DBSCAN and Spectral Clustering
+- Shape invariance analysis of decay curves
+- Noise resilience evaluation
+- Primitive operator selection and optimization
+- Full MLflow integration for reproducible experiments
 
 ## Project Organization
 
@@ -22,20 +54,16 @@ siglet_architecture
 │
 ├── models             <- Trained and serialized models, model predictions, or model summaries
 │
-├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-│                         the creator's initials, and a short `-` delimited description, e.g.
-│                         `1.0-jqp-initial-data-exploration`.
+├── notebooks          <- Jupyter notebooks, including Siglet-Qubit-Simulation.ipynb
 │
-├── pyproject.toml     <- Project configuration file with package metadata for
-│                         siglet_architecture and configuration for tools like black
+├── pyproject.toml     <- Project configuration file with package metadata and tool configuration
 │
 ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
 │
 ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
 │   └── figures        <- Generated graphics and figures to be used in reporting
 │
-├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-│                         generated with `pip freeze > requirements.txt`
+├── requirements.txt   <- The requirements file for reproducing the analysis environment
 │
 ├── setup.cfg          <- Configuration file for flake8
 │
@@ -49,12 +77,38 @@ siglet_architecture
     │
     ├── features.py             <- Code to create features for modeling
     │
-    ├── modeling
+    ├── models                  <- Module containing model implementations
     │   ├── __init__.py
+    │   ├── siglet_qubit.py     <- SigletQubit class implementation
     │   ├── predict.py          <- Code to run model inference with trained models
     │   └── train.py            <- Code to train models
     │
     └── plots.py                <- Code to create visualizations
 ```
+
+## Getting Started
+
+```bash
+# Clone the repository
+git clone https://github.com/Luiz-Frias/siglet_architecture.git
+cd siglet_architecture
+
+# Set up the environment
+conda env create -f environment.yml
+conda activate siglet_architecture
+
+# Run the notebook
+jupyter notebook notebooks/Siglet-Qubit-Simulation.ipynb
+```
+
+## Technology Stack
+
+- Python 3.10+
+- Numpy, Scipy, Pandas
+- Scikit-learn for machine learning algorithms
+- MLflow for experiment tracking
+- Matplotlib, Seaborn for visualization
+- FastDTW, tslearn for time series analysis
+- Optuna for hyperparameter optimization
 
 --------

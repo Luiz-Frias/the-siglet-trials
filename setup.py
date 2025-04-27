@@ -34,5 +34,7 @@ setup(
         "nbqa",
         "python-dotenv",
         "mkdocs",
+        "fastdtw",
+        "tslearn",
     ],
 )

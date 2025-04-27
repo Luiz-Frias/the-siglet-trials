@@ -1,0 +1,73 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+select = ["E", "F", "I"]
+ignore = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+
+[project]
+name = "siglet_architecture"
+version = "0.1.0"
+description = "siglet_architecture"
+authors = [
+    {name = "Luiz Frias"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+]
+dependencies = [
+    "pandas",
+    "numpy",
+    "scipy",
+    "matplotlib",
+    "seaborn",
+    "scikit-learn",
+    "xgboost",
+    "catboost",
+    "imbalanced-learn",
+    "shap",
+    "mlflow",
+    "optuna",
+    "loguru",
+    "joblib",
+    "jupyter",
+    "notebook",
+    "ipykernel",
+    "ipywidgets",
+    "typer",
+    "tqdm",
+    "ruff",
+    "pytest",
+    "black",
+    "pre-commit",
+    "nbqa",
+    "python-dotenv",
+    "mkdocs",
+    "fastdtw",
+    "tslearn",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "pytest",
+    "ruff",
+    "pre-commit",
+]
+
+[project.urls]
+Repository = "https://github.com/Luiz-Frias/siglet_architecture"
