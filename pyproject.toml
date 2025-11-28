@@ -2,6 +2,11 @@
 requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["siglet_architecture*"]
+exclude = ["tests*", "notebooks*", "data*", "models*", "reports*", "references*", "docs*"]
+
 [tool.black]
 line-length = 88
 target-version = ["py310"]
@@ -18,8 +23,8 @@ python_files = "test_*.py"
 
 [project]
 name = "siglet_architecture"
-version = "0.1.0"
-description = "siglet_architecture"
+version = "0.2.0"
+description = "Siglet-Qubit Kernel: Classical and Quantum Simulation Framework"
 authors = [
     {name = "Luiz Frias"}
 ]
@@ -70,4 +75,4 @@ dev = [
 ]
 
 [project.urls]
-Repository = "https://github.com/Luiz-Frias/siglet_architecture"
+Repository = "https://github.com/Luiz-Frias/the-siglet-trials"

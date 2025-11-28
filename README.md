@@ -90,8 +90,8 @@ The project employs several data science techniques:
 
 ```bash
 # Clone the repository
-git clone https://github.com/Luiz-Frias/siglet_architecture.git
-cd siglet_architecture
+git clone https://github.com/Luiz-Frias/the-siglet-trials.git
+cd the-siglet-trials
 
 # Set up the environment
 conda env create -f environment.yml
