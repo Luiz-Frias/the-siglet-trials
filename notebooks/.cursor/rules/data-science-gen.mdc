@@ -1,0 +1,483 @@
+---
+description: when working with jupyter notebooks in data science context
+alwaysApply: false
+---
+# JUPYTER NOTEBOOK PRINCIPLES
+
+## Notebook Organization
+
+- **Purpose-Centric Structure**: Each notebook should address one clear analytical purpose or question
+- **Logical Cell Flow**: Organize cells in a linear, logical progression from data loading to final insights
+- **Modular Design**: Break analysis into distinct sections (data loading, cleaning, exploration, modeling, evaluation)
+- **Consistent Headers**: Use markdown headers for all major sections (H1 for title, H2 for sections, H3 for subsections)
+- **Table of Contents**: Include a markdown table of contents at the beginning for longer notebooks
+- **Minimal Scrolling**: Limit vertical scrolling by using clear output methods and avoiding excessively large outputs
+- **Progressive Disclosure**: Present information in an order that builds understanding incrementally
+
+### Code Quality
+
+- **Function Extraction**: Extract complex logic into reusable functions with clear docstrings
+- **Import Organization**: Group imports by type (standard library, data science, visualization, custom modules)
+- **Constant Declaration**: Define constants at the top of the notebook with clear ALL_CAPS naming
+- **Error Handling**: Implement appropriate try/except blocks for data loading and external operations
+- **Path Abstraction**: Use relative paths or configurable path variables, never hardcoded absolute paths
+- **Memory Management**: Include explicit memory cleanup for large datasets (use del, gc.collect())
+- **Version Pinning**: Specify required package versions in a requirements.txt file
+
+### Data Processing Patterns
+
+- **Raw Data Preservation**: Never modify the original data source; always create transformational copies
+- **Transformation Chaining**: Use method chaining for clarity in pandas operations when appropriate
+- **Intermediate Checkpoints**: Save intermediate results for long-running processes
+- **Validation Steps**: Include explicit data validation checks after each major transformation
+- **Descriptive Variable Names**: Use meaningful variable names that indicate content and type
+- **Dimensionality Awareness**: Always check and document data dimensions before and after transformations
+- **Missing Data Strategy**: Explicitly document and justify strategies for handling missing values
+
+### Visualization Best Practices
+
+- **Plot Purpose**: Each visualization should answer a specific analytical question
+- **Consistent Styling**: Maintain consistent plot styles, colors, and themes throughout the notebook
+- **Complete Labeling**: Always include titles, axis labels, and legends for all visualizations
+- **Size Consideration**: Set appropriate figure sizes for different visualization types
+- **Color Accessibility**: Use colorblind-friendly palettes and high-contrast colors
+- **Plot Variety**: Use appropriate plot types for different analytical questions
+- **Multi-view Analysis**: Use subplot grids for related visualizations or small multiples for comparisons
+
+### Notebook Performance
+
+- **Execution Indicators**: Include time tracking for long-running cells (%%time magic)
+- **Sampling Strategy**: Use appropriate sampling techniques for exploratory analysis of large datasets
+- **Computation Awareness**: Use efficient vectorized operations rather than loops when possible
+- **Caching Mechanism**: Implement caching for expensive computations or API calls
+- **Progress Reporting**: Include progress indicators for long-running processes
+- **Pagination**: Implement pagination for large data exploration to avoid memory issues
+- **Output Limiting**: Limit display of large dataframes (head, tail, sample) to avoid browser crashes
+
+### Reproducibility
+
+- **Random Seed Control**: Always set and document random seeds for stochastic processes
+- **Environment Management**: Include environment setup instructions or environment.yml files
+- **Data Versioning**: Document data sources with version information or timestamps
+- **Parameter Documentation**: Clearly document and explain all model parameters and choices
+- **Result Persistence**: Save important results, models, and visualizations to disk
+- **Pipeline Automation**: Implement reproducible pipelines using proper abstractions
+- **Execution Verification**: Include execution verification cells that validate setup and environment
+
+### Documentation Standards
+
+- **Cell-Level Comments**: Include comments for complex code blocks explaining the why, not just the what
+- **Assumption Documentation**: Explicitly state and test assumptions about the data or analysis
+- **Decision Justification**: Document reasons for analytical choices and alternatives considered
+- **Reference Citation**: Include citations for methodologies, techniques, or external code sources
+- **Interpretative Context**: Add contextual explanations for results that connect to the business or research question
+- **Future Work**: Document limitations and potential improvements in a dedicated section
+- **Executive Summary**: Include a markdown cell with key findings at the beginning or end
+
+### Collaboration Patterns
+
+- **Authorship Information**: Include author names and contact information in the notebook header
+- **Contribution Tracking**: Note specific contributions by different team members
+- **Review Process**: Implement a clear review mechanism with rubrics for quality control
+- **Versioning Strategy**: Use clear version numbering and change logs for notebook iterations
+- **Knowledge Transfer**: Include onboarding information for new team members
+- **Standardized Templates**: Use consistent templates across the team for new analyses
+- **Feedback Mechanism**: Include a process for collecting and incorporating feedback
+
+### Ethical Data Science
+
+- **Privacy Preservation**: Remove or anonymize sensitive information before sharing
+- **Bias Awareness**: Include explicit checks for bias in data and models
+- **Impact Consideration**: Document potential impacts of findings and recommendations
+- **Limitation Transparency**: Clearly communicate limitations of the analysis
+- **Alternative Interpretations**: Present multiple interpretations of results when appropriate
+- **Proxy Variable Awareness**: Explicitly check and document proxy variables that may encode protected attributes
+- **Fairness Metrics**: Include appropriate fairness metrics for machine learning models
+
+### Model Development
+
+- **Baseline Establishment**: Always include simple baseline models for comparison
+- **Evaluation Framework**: Define evaluation metrics and validation strategy before model building
+- **Feature Importance**: Include feature importance analysis for all models
+- **Hyperparameter Documentation**: Document hyperparameter tuning process and results
+- **Model Persistence**: Save trained models using appropriate serialization (pickle, joblib)
+- **Cross-Validation**: Implement appropriate cross-validation strategies rather than single train/test splits
+- **Model Interpretability**: Include model interpretation cells, especially for complex models
+
+### Production Readiness
+
+- **Code Extraction**: Extract production-ready code to proper .py modules
+- **API Development**: Include examples of how analysis could be packaged as an API
+- **Scaling Considerations**: Document considerations for scaling the analysis to larger datasets
+- **Monitoring Guidelines**: Include suggestions for monitoring model performance over time
+- **Update Mechanism**: Design clear processes for updating models with new data
+- **Refactoring Path**: Document a clear path from exploratory notebook to production code
+- **Testing Approach**: Include unit tests for critical functions that will move to production
+
+## CONSULTING DATA SCIENCE TECH STACK
+
+### Core Analytics Libraries
+
+- **Pandas Ecosystem**: Leverage pandas methods for all dataframe operations; avoid numpy when pandas provides equivalent functions
+- **XGBoost First**: Use XGBoost as the primary classification model before exploring alternatives
+- **SMOTE Balancing**: Apply SMOTE or SMOTENC for imbalanced classification problems
+- **Sklearn Pipelines**: Build standardized preprocessing and modeling pipelines for all model development
+- **Feature Selection**: Apply RFE or SequentialFeatureSelector for dimensionality reduction before modeling
+- **Text Analytics**: Utilize NLTK and sklearn's TF-IDF for all text analysis projects
+- **Consistency Versioning**: Pin specific library versions in requirements files for each project
+- **Client-Specific Imports**: Structure import blocks with consistent format across all notebooks
+
+### Data Engineering Patterns
+
+- **File System Management**: Implement robust file system navigation with pathlib over os.path
+- **Defensive I/O Operations**: Wrap all data loading operations in try/except blocks with detailed error handling
+- **Data Lineage Tracking**: Document data sources with timestamps in dedicated markdown cells
+- **Data Schemas**: Define explicit schemas for all data sources at the beginning of notebooks
+- **Feature Engineering Framework**: Create reusable transformers that inherit from sklearn's BaseEstimator/TransformerMixin
+- **Semantic Naming**: Use domain-specific naming conventions that align with client terminology
+- **Composite Key Management**: Establish conventions for handling multi-part identifiers in client data
+- **Data Type Enforcement**: Explicitly convert and validate data types after loading
+
+### Model Development Workflow
+
+- **Model Development Lifecycle**: Follow the sequence of baseline → feature engineering → hyperparameter tuning → evaluation
+- **Model Registry**: Store all models with metadata including training parameters and performance metrics
+- **A/B Testing Framework**: Implement structured comparison between model variants
+- **Client Validation Split**: Set aside client-specific validation datasets that are never used in training
+- **Sensitivity Analysis**: Perform and document sensitivity analysis for all key model parameters
+- **Business Metric Alignment**: Map model metrics directly to client business outcomes
+- **Calibration Assessment**: Include probability calibration analysis for all classification models
+- **Operational Boundaries**: Define precise operational constraints based on client infrastructure
+
+### Client Delivery Standards
+
+- **Executive Summary**: Begin every notebook with business-focused executive summary
+- **Technical Replication Guide**: End every notebook with step-by-step instructions for technical team
+- **Business Context Section**: Include explicit business context section connecting analysis to client needs
+- **Visual Identity**: Follow client visual identity guidelines for plots and presentations
+- **Incremental Complexity**: Structure notebooks to present incremental complexity appropriate for audience
+- **Client Terminology Mapping**: Create and maintain a glossary mapping technical terms to client language
+- **Implementation Roadmap**: Include implementation roadmap with decision points for client teams
+- **Cost-Benefit Analysis**: Include cost-benefit analysis of model deployment tailored to client environment
+
+### Visualization Framework
+
+- **Branded Color Palettes**: Create and use client-specific color palettes for all visualizations
+- **Layered Explanations**: Implement visualization hierarchy for different stakeholder technical levels
+- **Dual-Axis Standards**: Use dual axis plots sparingly and only with clear explanation
+- **Visual Annotations**: Annotate all plots with key insights directly on the visualization
+- **Comparative Visuals**: Create consistent visual patterns for comparing model versions
+- **Visual Hierarchy**: Structure visualizations with clear focus on the most important insights
+- **Context Preservation**: Include sufficient context in standalone visualizations for proper interpretation
+- **Insight Boundaries**: Clearly indicate confidence intervals or uncertainty in all visualizations
+
+### Experimental Design Principles
+
+- **Project-Specific Controls**: Establish control baselines specific to each client project
+- **Insight Iteration**: Structure notebook flow to progressively build on insights
+- **Experimental Configuration**: Document all experimental setups with configuration dictionaries
+- **Validation Strategies**: Implement domain-specific validation strategies based on client data characteristics
+- **Systematic Benchmarking**: Include systematic benchmarking against industry standards
+- **Failure Analysis**: Document model limitations and failure modes in dedicated sections
+- **Parameter Sweep Strategy**: Implement structured parameter sweeps with documented methodology
+- **Client Hypothesis Testing**: Frame analysis as explicit tests of client-originated hypotheses
+
+### Code Quality & Maintainability
+
+- **Custom Class Architecture**: Develop client-specific class hierarchies for repeated analytical patterns
+- **Self-Diagnostic Code**: Implement self-checking code that validates its own outputs
+- **Notebook Templates**: Use client-specific templates for different types of analysis
+- **Section Timing**: Include timing cells for performance-critical sections
+- **Memory Profiling**: Monitor and document memory usage for large datasets
+- **Parameterization**: Extract all magic values to clearly named constants at notebook top
+- **Functional Decomposition**: Refactor complex operations into small, well-documented functions
+- **Progress Indicators**: Implement progress tracking for long-running operations
+
+### Enterprise Integration
+
+- **Security Compliance**: Follow client-specific data handling procedures for all notebooks
+- **Authentication Frameworks**: Implement secure credential management for data access
+- **Deployment Readiness**: Include deployment-ready code with appropriate abstractions
+- **Governance Alignment**: Structure analysis to support client governance requirements
+- **Auditability**: Create audit trails for all data transformations and modeling decisions
+- **Process Documentation**: Include process flow diagrams for complex analytical workflows
+- **Change Management**: Document version controls and change procedures for client handoff
+- **Knowledge Transfer Protocol**: Structure notebooks to facilitate knowledge transfer to client teams
+
+## DATA SCIENCE TECHNOLOGY STACK
+
+### Local Development Environment (Windows)
+
+- **IDE & Notebooks**: DataSpell as primary IDE for notebook development
+- **Package Management**: Conda environments with explicit dependency pinning (potential uv migration path)
+- **Local Containers**: Docker Desktop for Windows when containerization is needed
+- **Version Control**: Git with GitHub integration and branch-based workflow
+- **Local Compute**: Optimized configuration for CPU inference with fallback GPU support
+- **Environment Management**: environment.yml files with explicit version pinning
+- **Data Storage**: Local SQLite for development and prototyping
+- **Development Workflow**: Feature branch workflow with pull request-based reviews
+
+### Cloud/Production Environment
+
+- **Containerized Environments**: Docker-based reproducible data science environments
+- **Compute Orchestration**: Kubeflow for distributed training and pipeline automation
+- **GPU Acceleration**: CUDA toolkit with PyTorch optimizations for production
+- **Resource Management**: Ray clusters for distributed Python workloads
+- **Compute Scaling**: On-demand compute clusters with preemptible instances for cost optimization
+- **Data Science VMs**: Purpose-built machine images with pre-installed tooling
+- **Pipeline Orchestration**: Airflow for production workflows with monitored execution
+- **Notebook Infrastructure**: JupyterHub with resource quotas and auto-scaling
+
+### Core Data Science Libraries
+
+- **Data Manipulation**: pandas with typed DataFrames for small-to-medium datasets
+- **Scientific Computing**: NumPy/SciPy with typed array protocols
+- **Visualization**: Plotly for interactive dashboards and exploratory analysis
+- **Geospatial Analysis**: GeoPandas/Shapely with CRS management
+- **Time Series Processing**: Prophet/NeuralProphet for forecasting, statsmodels for analysis
+- **Distributed Computing**: Ray for parallelized parameter tuning and grid search
+- **Tabular Data**: polars for high-performance data manipulation when needed
+- **Feature Engineering**: scikit-learn transformers with custom pipeline components
+
+### Machine Learning Framework
+
+- **Modeling Toolkit**: scikit-learn with systematic pipeline construction
+- **Imbalanced Data**: imbalanced-learn for handling class imbalance problems
+- **Deep Learning**: PyTorch with TorchMetrics for standardized evaluation
+- **Gradient Boosting**: XGBoost as primary with LightGBM as performance alternative
+- **Hyperparameter Tuning**: Ray Tune for efficient grid search parallelization
+- **Model Interpretability**: SHAP with standardized visualization protocols
+- **Transfer Learning**: Hugging Face Transformers for NLP and vision tasks
+- **Probabilistic Modeling**: PyMC for Bayesian inference when required
+
+### AI & Foundation Models
+
+- **Large Language Models**: Hugging Face Transformers ecosystem
+- **Local LLM Inference**: llama.cpp for optimized CPU inference of Llama models
+- **Text Embeddings**: Sentence-Transformers with typed vector operations
+- **Prompt Engineering**: LangChain with structured prompt templates
+- **Vector Search**: FAISS for small-scale similarity search
+- **Multi-modal Models**: Domain-specific models based on project requirements
+- **Retrieval Augmentation**: Simple RAG implementations for domain-specific knowledge bases
+- **Model Serialization**: ONNX format for model interoperability and deployment
+
+### Data Engineering & Workflow Management
+
+- **Workflow Orchestration**: Airflow for complex pipelines (with Prefect as migration option)
+- **Pipeline Parameterization**: Dynamic pipeline generation with parameter passing
+- **Data Validation**: Simple schema validation with pandas and custom validators
+- **SQL Interface**: SQLAlchemy for database interactions
+- **Data Versioning**: DVC for tracking datasets and large files in Git workflow
+- **Parameter Tuning**: Optuna for intelligent hyperparameter optimization
+- **Incremental Processing**: Incremental pipeline stages with checkpointing
+- **Data Catalogs**: DataHub for metadata management when scale requires it
+
+### Experiment Management & Deployment
+
+- **Experiment Tracking**: MLflow for metrics, parameters, and artifacts
+- **Artifact Storage**: Structured local and cloud storage for models and datasets
+- **Versioning Control**: Git for code with DVC integration for data/models
+- **Project Templates**: Cookiecutter templates for standardized project structure
+- **Model Deployment**: FastAPI with Pydantic for model serving endpoints
+- **Feature Store**: Feast for feature management at scale when needed
+- **Model Monitoring**: Basic logging and periodic performance evaluation
+- **Batch Inference**: Optimized batch processing for high-throughput inference
+
+### Data Quality & Governance
+
+- **Data Documentation**: Data dictionaries with automated schema extraction
+- **Data Quality Checks**: Pytest-based data validation with custom rules
+- **Lineage Tracking**: OpenLineage for data flow visibility
+- **PII Management**: Automated PII detection and anonymization tools
+- **Access Controls**: Role-based access control for data and models
+- **Audit Logging**: Comprehensive data access and modification tracking
+- **Data Contracts**: Strongly typed schemas with validation enforcement
+- **Compliance Tools**: Automated regulatory compliance checking and reporting
+
+## END-TO-END DATA SCIENCE WORKFLOW TEMPLATE
+
+### Project Initialization
+
+- **Structure Creation**: Use Cookiecutter to create standardized project structure
+
+  ```bash
+  cookiecutter https://github.com/drivendata/cookiecutter-data-science
+  ```
+
+- **Git Setup**: Initialize Git repository with appropriate .gitignore
+
+  ```bash
+  git init
+  git add .
+  git commit -m "Initial project structure"
+  ```
+
+- **DVC Integration**: Set up data version control alongside Git
+
+  ```bash
+  dvc init
+  dvc remote add -d storage /path/to/remote/storage
+  ```
+
+- **Environment Creation**: Build Conda environment from template
+
+  ```bash
+  conda env create -f environment.yml
+  ```
+
+### Development Workflow
+
+1. **Exploratory Phase**:
+   - Create exploratory notebooks in DataSpell with clear naming convention: `{date}_{purpose}_exploration.ipynb`
+   - Set up MLflow tracking at the start of each notebook:
+
+     ```python
+     import mlflow
+     mlflow.set_experiment("[Project Name] - Exploration")
+     ```
+
+   - Document data sources and initial hypotheses in markdown cells
+   - Track key statistics and visualizations
+   - Version exploratory datasets with DVC
+
+2. **Feature Engineering Phase**:
+   - Create feature notebooks following template: `{date}_{feature_group}_engineering.ipynb`
+   - Extract reusable transformers to `/src/features/` modules
+   - Version intermediate datasets with DVC
+   - Document feature definitions and rationale
+   - Track feature performance metrics with MLflow
+
+3. **Model Development Phase**:
+   - Create model notebooks following template: `{date}_{model_type}_development.ipynb`
+   - Establish clear baseline models first
+   - Use Optuna for hyperparameter optimization
+   - Log all parameters, metrics, and artifacts with MLflow
+   - Implement SHAP/feature importance visualizations
+   - Export model comparison reports
+
+4. **Validation Phase**:
+   - Create validation notebooks following template: `{date}_{model_type}_validation.ipynb`
+   - Implement K-fold cross-validation and/or hold-out validation
+   - Assess model performance across key business metrics
+   - Generate client-ready performance visualizations
+   - Document limitations and assumptions clearly
+   - Register production-ready models in MLflow registry
+
+### Productionization Workflow
+
+1. **Code Refactoring**:
+   - Extract core logic from notebooks to modular Python scripts in `/src`
+   - Implement type hints and docstrings throughout
+   - Create unit tests for all functions
+   - Structure for maintainability:
+
+     ```
+     /src
+     ├── data/          # Data loading and processing
+     ├── features/      # Feature engineering transformers
+     ├── models/        # Model definition and training
+     ├── evaluation/    # Evaluation metrics and visualization
+     └── utils/         # Shared utilities
+     ```
+
+2. **Pipeline Creation**:
+   - Define Prefect workflow for end-to-end model pipeline:
+
+     ```python
+     @flow(name="Propensity Model Pipeline")
+     def model_pipeline(config_path: str):
+         # Load configuration
+         config = load_config(config_path)
+         
+         # Execute tasks
+         data = load_data_task(config["data_path"])
+         features = engineer_features_task(data, config["feature_params"])
+         model = train_model_task(features, config["model_params"])
+         metrics = evaluate_model_task(model, features, config["eval_params"])
+         
+         # Log to MLflow
+         log_results_task(model, metrics, config)
+         
+         return model, metrics
+     ```
+
+   - Create configuration files for different scenarios
+
+3. **Version Control Integration**:
+   - Track code changes with Git
+   - Track data and model artifacts with DVC
+   - Set up CI/CD for automated testing
+   - Link MLflow runs to Git commits
+
+4. **Deployment Preparation**:
+   - Package model using BentoML:
+
+     ```python
+     import bentoml
+     
+     # Save the model
+     bentoml.sklearn.save_model(
+         "propensity_model",
+         model,
+         signatures={"predict": {"batchable": True}}
+     )
+     
+     # Define service
+     svc = bentoml.Service("propensity_service", runners=[model_runner])
+     
+     @svc.api(input=bentoml.io.JSON(), output=bentoml.io.JSON())
+     async def predict(input_data):
+         # Preprocess
+         features = preprocess(input_data)
+         
+         # Predict
+         prediction = await model_runner.predict.async_run(features)
+         
+         # Postprocess
+         result = postprocess(prediction)
+         
+         return result
+     ```
+
+   - Create Docker container for model serving
+   - Document deployment instructions
+
+### Client Delivery Process
+
+1. **Documentation Generation**:
+   - Create executive summary from template
+   - Generate technical documentation from code
+   - Produce model cards with performance and limitation details
+   - Create replication guide for client teams
+
+2. **Delivery Packaging**:
+   - Package code repositories with clean history
+   - Provide containerized model serving solution
+   - Deliver notebooks with clear execution instructions
+   - Include sample integration code for client systems
+
+3. **Knowledge Transfer**:
+   - Prepare presentation with business context
+   - Document feature importance and business impact
+   - Create maintenance guide with update procedures
+   - Include monitoring recommendations
+
+### Maintenance and Evolution
+
+1. **Monitoring Setup**:
+   - Implement data drift detection
+   - Set up model performance tracking
+   - Create alerting for degradation
+   - Document retraining triggers
+
+2. **Update Process**:
+   - Define clear update cadence
+   - Document data refresh procedures
+   - Maintain model versions in registry
+   - Track performance across versions
+
+3. **Continuous Improvement**:
+   - Catalog feature ideas for future iterations
+   - Document lessons learned
+   - Maintain research backlog
+   - Update workflow templates based on project experience
